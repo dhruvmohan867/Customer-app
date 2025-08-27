@@ -36,3 +36,27 @@ body, html {
 
 /* ensure links and subdued text adapt */
 a, .muted { color: var(--muted); }
+/* Fix/override for missing/broken .form-floating label selector */
+.form-floating > .form-control ~ label,
+.form-floating > .form-select ~ label,
+.form-floating > input ~ label,
+.form-floating > textarea ~ label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 1rem 0.75rem;
+  pointer-events: none;
+  transform-origin: 0 0;
+  transition: transform .1s ease-in-out, color .1s ease-in-out, opacity .1s ease-in-out;
+  color: rgba(0,0,0,0.65); /* adjust to match theme */
+}
+
+/* Example floating behaviour - tweak values to match your Bootstrap version */
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-select:focus ~ label,
+.form-floating > .form-select:not([value=""]) ~ label {
+  transform: scale(.85) translateY(-0.5rem);
+  opacity: 0.85;
+}
