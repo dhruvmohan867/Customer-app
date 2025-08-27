@@ -10,12 +10,14 @@ import { ThemeService, ThemeMode } from '../../services/theme.service';
   standalone: true,
   imports: [CommonModule, MatButtonModule, MatIconModule],
   template: `
-    <button mat-icon-button (click)="cycle()" [title]="title">
+    <button mat-icon-button (click)="cycle()" [attr.aria-label]="title" [title]="title">
       <mat-icon>{{ icon }}</mat-icon>
     </button>
+    <span class="theme-label">{{ title }}</span>
   `,
   styles: [`
     button { min-width: 40px; }
+    .theme-label { margin-left: 8px; font-size: 14px; vertical-align: middle; }
   `]
 })
 export class ThemeToggleComponent {

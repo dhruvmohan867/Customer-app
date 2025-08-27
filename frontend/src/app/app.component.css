@@ -2,7 +2,30 @@
 .brand { display:flex; align-items:center; gap:8px; cursor:pointer; }
 .title { font-weight:600; font-size:18px; }
 .spacer { flex:1 1 auto; }
-.main-wrap { padding: 24px 16px; min-height: calc(100vh - 128px); background: linear-gradient(180deg, #f7fbff, #ffffff); }
-.site-footer { display:flex; justify-content:space-between; align-items:center; padding:12px 24px; border-top:1px solid rgba(0,0,0,0.06); font-size:14px; color: rgba(0,0,0,0.6); }
-.site-footer .footer-links a { margin-left:12px; text-decoration:none; color:inherit; }
-@media (max-width:600px) { .nav { display:none; } .title { font-size:16px; } }
+/* Use theme variables for background */
+.main-wrap { 
+  padding: 24px 16px; 
+  min-height: calc(100vh - 128px); 
+  background: linear-gradient(180deg, var(--bg), #ffffff); 
+  color: var(--text);
+}
+/* Use theme variables for border and text */
+.site-footer { 
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center; 
+  padding:12px 24px; 
+  border-top:1px solid var(--muted); 
+  font-size:14px; 
+  color: var(--muted);
+  background: var(--bg);
+}
+.site-footer .footer-links a { 
+  margin-left:12px; 
+  text-decoration:none; 
+  color:inherit; 
+}
+@media (max-width:600px) { 
+  .nav { display:none; } 
+  .title { font-size:16px; } 
+}

@@ -1,13 +1,19 @@
+<!-- frontend/src/app/app.component.html -->
 <mat-toolbar class="topbar" color="primary">
   <div class="brand" routerLink="/">
     <span class="material-icons">people</span>
     <span class="title">CustomerApp</span>
   </div>
+
   <span class="spacer"></span>
+
+  <!-- Theme toggle button (cycles system → light → dark) -->
+  <app-theme-toggle></app-theme-toggle>
+
   <nav class="nav">
-    <button mat-button routerLink="/">Home</button>
-    <button mat-button routerLink="/customers">Customers</button>
-    <button mat-stroked-button routerLink="/create">Create</button>
+    <button mat-button routerLink="/" routerLinkActive="active">Home</button>
+    <button mat-button routerLink="/customers" routerLinkActive="active">Customers</button>
+    <button mat-stroked-button routerLink="/create" routerLinkActive="active">Create</button>
   </nav>
 </mat-toolbar>
 

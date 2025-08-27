@@ -1,10 +1,12 @@
 /* ===== theme variables (light/dark) ===== */
-:root{
+:root {
   --bg: #ffffff;
   --text: #0b1220;
   --muted: rgba(0,0,0,0.6);
   --card: #ffffff;
   --surface-elev: 0 6px 18px rgba(11,17,32,0.06);
+  --primary: #1976d2;
+  --primary-contrast: #fff;
 }
 
 .dark-theme {
@@ -13,19 +15,23 @@
   --muted: rgba(255,255,255,0.7);
   --card: #0f1724;
   --surface-elev: 0 6px 18px rgba(255,255,255,0.03);
+  --primary: #90caf9;
+  --primary-contrast: #071125;
 }
 
-body {
+body, html {
   background: var(--bg);
   color: var(--text);
-  transition: background .18s ease, color .18s ease;
+  transition: background .18s, color .18s;
+  min-height: 100vh;
 }
 
 /* make our custom cards, hero, and mat-card follow variables */
 .app-card, .hero-card, mat-card {
   background: var(--card);
-  box-shadow: var(--surface-elev);
   color: var(--text);
+  box-shadow: var(--surface-elev);
+  transition: background .18s, color .18s;
 }
 
 /* ensure links and subdued text adapt */

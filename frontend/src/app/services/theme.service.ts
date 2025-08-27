@@ -18,9 +18,6 @@ export class ThemeService implements OnDestroy {
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     const isBrowser = isPlatformBrowser(this.platformId);
 
-    // Debug log (safe)
-    // console.log('ThemeService ctor — isBrowser =', isBrowser);
-
     let saved: ThemeMode = 'system';
 
     if (isBrowser) {
@@ -36,7 +33,6 @@ export class ThemeService implements OnDestroy {
 
     this._mode.next(saved);
 
-    // Only do DOM/class application in browser
     if (isBrowser) {
       this.apply(saved);
 
@@ -80,13 +76,10 @@ export class ThemeService implements OnDestroy {
 
   apply(mode: ThemeMode) {
     if (!isPlatformBrowser(this.platformId)) return;
-
     const prefersDark =
       typeof window.matchMedia === 'function' &&
       window.matchMedia('(prefers-color-scheme: dark)').matches;
-
     const useDark = mode === 'dark' || (mode === 'system' && prefersDark);
-
     try {
       document.documentElement.classList.toggle('dark-theme', useDark);
     } catch (err) {

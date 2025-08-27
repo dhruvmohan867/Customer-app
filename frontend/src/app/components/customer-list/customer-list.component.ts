@@ -41,7 +41,7 @@ export class CustomerListComponent implements OnInit {
   }
 
   onDeleteClick(customer: Customer) {
-    if (window.confirm("Are you sure you want to delete the customer: " + customer.name + " ?")) {
+    if (typeof window !== 'undefined' && window.confirm("Are you sure you want to delete the customer: " + customer.name + " ?")) {
       this.customerService.delete(customer._id).subscribe(
         data => {
           this.initData();
