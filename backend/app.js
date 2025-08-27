@@ -1,9 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
-
 const PORT = 3000;
 
 // enable cors
@@ -13,25 +15,25 @@ app.use(express.json());
 
 // route the customer api
 const customerRoutes = require('./routes/customers');
-// use the route
 app.use('/api/customers', customerRoutes);
 
 app.get('/', (req, res) => {
-    res.send("Welcome to Customers API !")
-})
+    res.send("Welcome to Customers API !");
+});
 
 app.listen(PORT, (error) => {
     if (!error)
-        console.log("Server is successfully listening at port:", PORT);
+        console.log("✅ Server is successfully listening at port:", PORT);
     else
-        console.error('An error occurred:', error);
+        console.error('❌ An error occurred:', error);
 });
 
+// connect to MongoDB
 main().catch((error) => console.error(error));
 
 async function main() {
-    // prepre conn string
-    const connectionString = "your_mongo_db_connection_string_here";
-    await mongoose.connect(connectionString);
+    const connectionString = process.env.MONGODB_URL;
     mongoose.set('strictQuery', true);
+    await mongoose.connect(connectionString);
+    console.log("✅ MongoDB connected successfully!");
 }
