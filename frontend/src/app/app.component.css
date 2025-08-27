@@ -1,0 +1,8 @@
+.topbar { position: sticky; top:0; z-index:1000; display:flex; align-items:center; }
+.brand { display:flex; align-items:center; gap:8px; cursor:pointer; }
+.title { font-weight:600; font-size:18px; }
+.spacer { flex:1 1 auto; }
+.main-wrap { padding: 24px 16px; min-height: calc(100vh - 128px); background: linear-gradient(180deg, #f7fbff, #ffffff); }
+.site-footer { display:flex; justify-content:space-between; align-items:center; padding:12px 24px; border-top:1px solid rgba(0,0,0,0.06); font-size:14px; color: rgba(0,0,0,0.6); }
+.site-footer .footer-links a { margin-left:12px; text-decoration:none; color:inherit; }
+@media (max-width:600px) { .nav { display:none; } .title { font-size:16px; } }

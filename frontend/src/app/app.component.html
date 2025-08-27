@@ -1,6 +1,24 @@
-<div class="container">
-  <h2>
-    Customers Management
-  </h2>
+<mat-toolbar class="topbar" color="primary">
+  <div class="brand" routerLink="/">
+    <span class="material-icons">people</span>
+    <span class="title">CustomerApp</span>
+  </div>
+  <span class="spacer"></span>
+  <nav class="nav">
+    <button mat-button routerLink="/">Home</button>
+    <button mat-button routerLink="/customers">Customers</button>
+    <button mat-stroked-button routerLink="/create">Create</button>
+  </nav>
+</mat-toolbar>
+
+<main class="main-wrap">
   <router-outlet></router-outlet>
-</div>
+</main>
+
+<footer class="site-footer">
+  <div>© CustomerApp — Built with Dhruv</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/dhruvmohanshukla/" target="_blank" rel="noopener">Linkedin</a>
+    <a href="https://github.com/dhruvmohan867" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
