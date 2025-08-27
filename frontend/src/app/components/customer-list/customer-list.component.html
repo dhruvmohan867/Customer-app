@@ -1,0 +1,25 @@
+<h5>
+    Customer List
+</h5>
+<button mat-raised-button color="primary" [routerLink]="'/create'">
+    Create New Customer
+</button>
+
+<div *ngFor="let customer of customers" class="mat-elevation-z2 p-2 my-2 d-flex align-items-center">
+    <div>
+        {{customer.name}}
+        {{customer.email}}
+        {{customer.phone}}
+    </div>
+    <div class="ms-auto">
+        <button mat-icon-button [routerLink]="'/edit/' + customer._id">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button [routerLink]="'/details/' + customer._id">
+            <mat-icon>visibility</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onDeleteClick(customer)">
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </div>
+</div>

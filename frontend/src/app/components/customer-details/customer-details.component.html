@@ -1,0 +1,24 @@
+<h4>
+    Customer Details
+</h4>
+
+<div *ngIf="customer">
+    <p>
+        <label class="fw-bold">
+            Name:
+        </label>
+        {{customer.name}}
+    </p>
+    <p>
+        <label class="fw-bold">
+            Email:
+        </label>
+        {{customer.email}}
+    </p>
+    <p>
+        <label class="fw-bold">
+            Phone:
+        </label>
+        {{customer.phone}}
+    </p>
+</div>
