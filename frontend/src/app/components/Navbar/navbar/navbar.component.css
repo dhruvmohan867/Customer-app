@@ -1,0 +1,4 @@
+.navbar { display:flex; align-items:center; padding:0 16px; }
+.logo { font-weight:700; font-size:1.1rem; }
+.spacer { flex:1 1 auto; }
+nav button.active { font-weight:600; }
