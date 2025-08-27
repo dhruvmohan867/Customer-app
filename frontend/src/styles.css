@@ -1,4 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* ===== theme variables (light/dark) ===== */
+:root{
+  --bg: #ffffff;
+  --text: #0b1220;
+  --muted: rgba(0,0,0,0.6);
+  --card: #ffffff;
+  --surface-elev: 0 6px 18px rgba(11,17,32,0.06);
+}
+
+.dark-theme {
+  --bg: #071125;
+  --text: #e6eef8;
+  --muted: rgba(255,255,255,0.7);
+  --card: #0f1724;
+  --surface-elev: 0 6px 18px rgba(255,255,255,0.03);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background .18s ease, color .18s ease;
+}
+
+/* make our custom cards, hero, and mat-card follow variables */
+.app-card, .hero-card, mat-card {
+  background: var(--card);
+  box-shadow: var(--surface-elev);
+  color: var(--text);
+}
+
+/* ensure links and subdued text adapt */
+a, .muted { color: var(--muted); }

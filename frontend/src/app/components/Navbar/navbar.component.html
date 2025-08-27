@@ -2,8 +2,11 @@
   <span class="logo" [routerLink]="['/']" style="cursor:pointer">CustomerApp</span>
   <span class="spacer"></span>
   <nav>
-    <button mat-button routerLink="/" routerLinkActive="active">Home</button>
-    <button mat-button routerLink="/customers" routerLinkActive="active">Customers</button>
-    <button mat-button routerLink="/create" routerLinkActive="active">Create</button>
+    <button mat-raised-button routerLink="/" routerLinkActive="active">Home</button>
+    <button mat-raised-button routerLink="/customers">Customers</button>
+    <button mat-stroked-button routerLink="/create">Create</button>
   </nav>
 </mat-toolbar>
+
+<!-- Route Content Loads Here -->
+<router-outlet></router-outlet>
