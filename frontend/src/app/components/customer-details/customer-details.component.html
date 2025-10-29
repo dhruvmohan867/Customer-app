@@ -2,23 +2,39 @@
     Customer Details
 </h4>
 
-<div *ngIf="customer">
-    <p>
-        <label class="fw-bold">
-            Name:
-        </label>
-        {{customer.name}}
-    </p>
-    <p>
-        <label class="fw-bold">
-            Email:
-        </label>
-        {{customer.email}}
-    </p>
-    <p>
-        <label class="fw-bold">
-            Phone:
-        </label>
-        {{customer.phone}}
-    </p>
+<div class="state-view" *ngIf="loading">
+  <mat-spinner diameter="40"></mat-spinner>
+  <p class="muted">Loading details...</p>
+</div>
+
+<mat-card *ngIf="!loading && customer">
+  <mat-card-header>
+    <mat-card-title>{{ customer.name }}</mat-card-title>
+    <mat-card-subtitle>Customer Details</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <mat-icon matListItemIcon>email</mat-icon>
+        <div matListItemTitle>{{ customer.email }}</div>
+        <div matListItemLine>Email</div>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <mat-icon matListItemIcon>phone</mat-icon>
+        <div matListItemTitle>{{ customer.phone }}</div>
+        <div matListItemLine>Phone</div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-stroked-button routerLink="/customers">Back to List</button>
+    <button mat-flat-button color="primary" [routerLink]="['/edit', customer._id]">Edit Customer</button>
+  </mat-card-actions>
+</mat-card>
+
+<div class="state-view" *ngIf="!loading && !customer">
+  <mat-icon>error_outline</mat-icon>
+  <h3>Customer Not Found</h3>
+  <p class="muted">The requested customer could not be found.</p>
+  <button mat-stroked-button routerLink="/customers">Back to List</button>
 </div>

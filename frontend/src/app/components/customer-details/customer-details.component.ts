@@ -1,38 +1,43 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../models/customer.model';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-customer-details',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule, RouterModule, MatCardModule, MatListModule,
+    MatIconModule, MatButtonModule, MatProgressSpinnerModule
   ],
   templateUrl: './customer-details.component.html',
   styleUrl: './customer-details.component.css'
 })
 export class CustomerDetailsComponent implements OnInit {
-
   private activatedRouter = inject(ActivatedRoute);
   private customerService = inject(CustomerService);
-  customer!: Customer;
-  customerId!: string;
+  customer: Customer | undefined;
+  loading = true;
+
   ngOnInit(): void {
-    // get the customer from the url
-    this.customerId = this.activatedRouter.snapshot.params['id'];
-    if (this.customerId) {
-      // get the cstomer info
-      this.customerService.getById(this.customerId).subscribe(
-        data => {
+    const customerId = this.activatedRouter.snapshot.params['id'];
+    if (customerId) {
+      this.customerService.getById(customerId).subscribe({
+        next: (data) => {
           this.customer = data;
+          this.loading = false;
         },
-        error => {
-          console.error('error:', error);
+        error: (err) => {
+          console.error('error:', err);
+          this.loading = false;
         }
-      )
+      });
     }
-    console.log('customerId:', this.customerId)
   }
 }

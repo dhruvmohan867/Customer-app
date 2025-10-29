@@ -5,21 +5,53 @@
     Create New Customer
 </button>
 
-<div *ngFor="let customer of customers" class="mat-elevation-z2 p-2 my-2 d-flex align-items-center">
-    <div>
-        {{customer.name}}
-        {{customer.email}}
-        {{customer.phone}}
+<div class="card">
+  <header class="list-header">
+    <h2>Customers</h2>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Filter Customers</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search by name, email, etc.">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </header>
+
+  <div class="table-container" *ngIf="!loading && dataSource.data.length > 0; else stateView">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let c"> {{c.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let c"> {{c.email}} </td>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef> Phone </th>
+        <td mat-cell *matCellDef="let c"> {{c.phone}} </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let c" class="actions-cell">
+          <button mat-icon-button [routerLink]="['/details', c._id]" title="View Details"><mat-icon>visibility</mat-icon></button>
+          <button mat-icon-button [routerLink]="['/edit', c._id]" title="Edit Customer"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="onDeleteClick(c)" title="Delete Customer"><mat-icon>delete_outline</mat-icon></button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <ng-template #stateView>
+    <div class="state-view" *ngIf="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p class="muted">Loading customers...</p>
     </div>
-    <div class="ms-auto">
-        <button mat-icon-button [routerLink]="'/edit/' + customer._id">
-            <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button [routerLink]="'/details/' + customer._id">
-            <mat-icon>visibility</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="onDeleteClick(customer)">
-            <mat-icon>cancel</mat-icon>
-        </button>
+    <div class="state-view" *ngIf="!loading && dataSource.data.length === 0">
+      <mat-icon>group_off</mat-icon>
+      <h3>No Customers Found</h3>
+      <p class="muted">Get started by creating a new customer.</p>
+      <button mat-flat-button color="primary" routerLink="/create">Create Customer</button>
     </div>
+  </ng-template>
 </div>

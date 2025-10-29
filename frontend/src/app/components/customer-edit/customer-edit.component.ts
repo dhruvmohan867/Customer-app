@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CustomerService } from '../../services/customer.service';
 import { Customer } from '../../models/customer.model';
@@ -8,69 +8,59 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-customer-edit',
   standalone: true,
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    RouterModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule
+    CommonModule, ReactiveFormsModule, MatButtonModule, RouterModule,
+    MatFormFieldModule, MatInputModule, MatIconModule, MatSnackBarModule, MatCardModule
   ],
   templateUrl: './customer-edit.component.html',
   styleUrl: './customer-edit.component.css'
 })
-export class CustomerEditComponent {
+export class CustomerEditComponent implements OnInit {
   private activatedRouter = inject(ActivatedRoute);
   private customerService = inject(CustomerService);
-  customer!: Customer;
-  customerId!: string;
-
-  form!: FormGroup;
+  private snack = inject(MatSnackBar);
   router = inject(Router);
 
+  customerId!: string;
+  form!: FormGroup;
+
   ngOnInit(): void {
-    // get the customer from the url
     this.customerId = this.activatedRouter.snapshot.params['id'];
-    // init the form
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.email),
+      email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl('', Validators.required)
     });
 
     if (this.customerId) {
-      // get the cstomer info
-      this.customerService.getById(this.customerId).subscribe(
-        data => {
-          this.customer = data;
-          this.form.patchValue(data);
-        },
-        error => {
-          console.error('error:', error);
+      this.customerService.getById(this.customerId).subscribe({
+        next: (data) => this.form.patchValue(data),
+        error: (err) => {
+          this.snack.open('Failed to load customer data', 'Dismiss', { duration: 4000 });
+          console.error(err);
         }
-      )
+      });
     }
-
-
   }
 
   onSubmit() {
-    // validate the form
     if (this.form.valid) {
-      this.customerService.put(this.customerId, this.form.value).subscribe(
-        data => {
-          console.log('data posted');
-          this.router.navigate(['/']);
+      this.customerService.put(this.customerId, this.form.value).subscribe({
+        next: () => {
+          this.snack.open('Customer updated successfully!', 'OK', { duration: 3000 });
+          this.router.navigate(['/customers']);
         },
-        error => {
-          console.error('error:', error);
+        error: (err) => {
+          this.snack.open('Failed to update customer', 'Dismiss', { duration: 4000 });
+          console.error(err);
         }
-      )
+      });
     }
   }
 }

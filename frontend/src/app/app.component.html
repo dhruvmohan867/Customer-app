@@ -28,3 +28,52 @@
     <a href="https://github.com/dhruvmohan867" target="_blank" rel="noopener">GitHub</a>
   </div>
 </footer>
+
+<mat-sidenav-container class="app-container">
+  <mat-sidenav #drawer mode="over" class="app-sidenav">
+    <div class="sidenav-header">Menu</div>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" (click)="drawer.close()">Home</a>
+      <a mat-list-item routerLink="/customers" (click)="drawer.close()">Customers</a>
+      <a mat-list-item routerLink="/create" (click)="drawer.close()">Create</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="topbar">
+      <button mat-icon-button class="only-mobile" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="brand" routerLink="/">
+        <mat-icon>people</mat-icon>
+        <span class="title">CustomerApp</span>
+      </div>
+      <span class="spacer"></span>
+      <nav class="nav only-desktop">
+        <button mat-button routerLink="/" routerLinkActive="active">Home</button>
+        <button mat-button routerLink="/customers" routerLinkActive="active">Customers</button>
+      </nav>
+      <div class="only-desktop" style="margin-left: 12px;">
+        <button mat-raised-button color="primary" routerLink="/create">
+          <mat-icon>add</mat-icon>
+          <span>Create</span>
+        </button>
+      </div>
+      <app-theme-toggle></app-theme-toggle>
+    </mat-toolbar>
+
+    <main class="main-wrap">
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div>© CustomerApp</div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/dhruvmohanshukla/" target="_blank" rel="noopener">Linkedin</a>
+        <a href="https://github.com/dhruvmohan867" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

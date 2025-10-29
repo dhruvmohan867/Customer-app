@@ -1,31 +1,18 @@
-.topbar { position: sticky; top:0; z-index:1000; display:flex; align-items:center; }
-.brand { display:flex; align-items:center; gap:8px; cursor:pointer; }
-.title { font-weight:600; font-size:18px; }
-.spacer { flex:1 1 auto; }
-/* Use theme variables for background */
-.main-wrap { 
-  padding: 24px 16px; 
-  min-height: calc(100vh - 128px); 
-  background: linear-gradient(180deg, var(--bg), #ffffff); 
-  color: var(--text);
+.app-container { height: 100vh; background: var(--bg); }
+.app-sidenav { width: 260px; background: var(--surface); color: var(--text); border-right: 1px solid var(--border); }
+.sidenav-header { padding: 16px; font-weight: 600; border-bottom: 1px solid var(--border); }
+.topbar { position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; background: var(--surface); color: var(--text); border-bottom: 1px solid var(--border); }
+.brand { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.title { font-weight: 600; font-size: 18px; }
+.spacer { flex: 1 1 auto; }
+.nav button.active { font-weight: 600; background: rgba(0,0,0,0.04); }
+.dark-theme .nav button.active { background: rgba(255,255,255,0.08); }
+.only-mobile { display: none; }
+.only-desktop { display: flex; align-items: center; }
+@media (max-width: 768px) {
+  .only-mobile { display: inline-flex; }
+  .only-desktop { display: none; }
 }
-/* Use theme variables for border and text */
-.site-footer { 
-  display:flex; 
-  justify-content:space-between; 
-  align-items:center; 
-  padding:12px 24px; 
-  border-top:1px solid var(--muted); 
-  font-size:14px; 
-  color: var(--muted);
-  background: var(--bg);
-}
-.site-footer .footer-links a { 
-  margin-left:12px; 
-  text-decoration:none; 
-  color:inherit; 
-}
-@media (max-width:600px) { 
-  .nav { display:none; } 
-  .title { font-size:16px; } 
-}
+.main-wrap { min-height: calc(100vh - 129px); }
+.site-footer { display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; border-top: 1px solid var(--border); font-size: 14px; color: var(--muted); background: var(--surface); }
+.site-footer .footer-links a { margin-left: 12px; }

@@ -1,62 +1,56 @@
-/* ===== theme variables (light/dark) ===== */
-:root {
-  --bg: #ffffff;
+/* Modern theme variables */
+:root{
+  --bg: #f7f9fc;
+  --surface: #ffffff;
   --text: #0b1220;
-  --muted: rgba(0,0,0,0.6);
-  --card: #ffffff;
-  --surface-elev: 0 6px 18px rgba(11,17,32,0.06);
+  --muted: rgba(0,0,0,.62);
   --primary: #1976d2;
   --primary-contrast: #fff;
+  --card: #ffffff;
+  --elev: 0 6px 18px rgba(11,17,32,.06);
+  --border: rgba(0,0,0,0.08);
 }
 
-.dark-theme {
+.dark-theme{
   --bg: #071125;
+  --surface: #0f1724;
   --text: #e6eef8;
-  --muted: rgba(255,255,255,0.7);
-  --card: #0f1724;
-  --surface-elev: 0 6px 18px rgba(255,255,255,0.03);
+  --muted: rgba(255,255,255,.7);
+  --card: #131f31;
+  --elev: 0 6px 18px rgba(0,0,0,.2);
+  --border: rgba(255,255,255,0.1);
   --primary: #90caf9;
   --primary-contrast: #071125;
 }
 
-body, html {
-  background: var(--bg);
-  color: var(--text);
-  transition: background .18s, color .18s;
-  min-height: 100vh;
+html,body{
+  min-height:100%;
+  background:var(--bg);
+  color:var(--text);
+  transition:background .2s ease,color .2s ease;
+  font-family: 'Roboto', sans-serif;
 }
 
-/* make our custom cards, hero, and mat-card follow variables */
-.app-card, .hero-card, mat-card {
-  background: var(--card);
-  color: var(--text);
-  box-shadow: var(--surface-elev);
-  transition: background .18s, color .18s;
-}
+/* utility */
+.container{ max-width:1200px; margin:0 auto; padding:16px; }
+.card{ background:var(--card); color:var(--text); box-shadow:var(--elev); border-radius:14px; padding:24px; }
+.muted{ color:var(--muted); }
+a{ color:inherit; text-decoration: none; }
+.w-100 { width: 100%; }
 
-/* ensure links and subdued text adapt */
-a, .muted { color: var(--muted); }
-/* Fix/override for missing/broken .form-floating label selector */
+/* fix floating label sample (kept from your CSS) */
 .form-floating > .form-control ~ label,
 .form-floating > .form-select ~ label,
 .form-floating > input ~ label,
-.form-floating > textarea ~ label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  padding: 1rem 0.75rem;
-  pointer-events: none;
-  transform-origin: 0 0;
-  transition: transform .1s ease-in-out, color .1s ease-in-out, opacity .1s ease-in-out;
-  color: rgba(0,0,0,0.65); /* adjust to match theme */
+.form-floating > textarea ~ label{
+  position:absolute; top:0; left:0; height:100%;
+  padding:1rem .75rem; pointer-events:none; transform-origin:0 0;
+  transition:transform .1s ease,color .1s ease,opacity .1s ease;
+  color:var(--muted);
 }
-
-/* Example floating behaviour - tweak values to match your Bootstrap version */
 .form-floating > .form-control:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
 .form-floating > .form-select:focus ~ label,
-.form-floating > .form-select:not([value=""]) ~ label {
-  transform: scale(.85) translateY(-0.5rem);
-  opacity: 0.85;
+.form-floating > .form-select:not([value=""]) ~ label{
+  transform:scale(.85) translateY(-.5rem); opacity:.85;
 }
