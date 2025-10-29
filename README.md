@@ -32,10 +32,6 @@ responsive UI—plus it's themable with light, dark, and system modes.
 
 ---
 
-## Demo
-
-*(Replace with your live app link or GIF)*  
-![App Demo](assets/images/demo.gif)
 
 ---
 
