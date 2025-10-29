@@ -6,6 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    MatSnackBarModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
